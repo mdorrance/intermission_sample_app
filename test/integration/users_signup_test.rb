@@ -11,6 +11,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                password_confirmation: "123" }
     end
     assert_template "users/new"
+    assert_select "div#<CSS id for error explaination>"
+    assert_select "div.<CSS class for field with error>"
   end
 
   test "valid signup information" do
@@ -22,5 +24,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                             password_confirmation: "123456" }
     end
     assert_template "users/show"
+    assert_not flash[:warning]
   end
 end
